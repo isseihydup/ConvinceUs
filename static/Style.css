@@ -5,8 +5,18 @@ body {
     text-align:center;
 }
 
+.glitch {
+    animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
 input, button {
-    width:80%;
+    width:85%;
     padding:12px;
     margin:8px;
     background:black;
@@ -17,14 +27,4 @@ input, button {
 button:hover {
     background:white;
     color:black;
-}
-
-.glitch {
-    animation: flicker 1s infinite alternate;
-}
-
-@keyframes flicker {
-    0% { opacity: 1; }
-    50% { opacity: 0.4; }
-    100% { opacity: 1; }
 }
