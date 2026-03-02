@@ -2,19 +2,15 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ConvinceUs</title>
+<title>CONVINCE US</title>
 <link rel="stylesheet" href="/static/style.css">
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 </head>
 <body>
 
-<div id="intro">
 <h1 class="glitch">CONVINCE US</h1>
-<p>One of you does not belong.</p>
-<button onclick="enter()">ENTER</button>
-</div>
 
-<div id="menu" style="display:none;">
+<div id="menu">
 <input id="name" placeholder="Your Name">
 <input id="room" placeholder="Room Code">
 <button onclick="createRoom()">Create</button>
@@ -24,10 +20,8 @@
 <div id="game" style="display:none;">
 <h2 id="roomDisplay"></h2>
 <div id="players"></div>
-<button onclick="startGame()">Start Game</button>
-
-<div id="role"></div>
-<div id="voteSection"></div>
+<button onclick="startGame()">Start</button>
+<div id="status"></div>
 </div>
 
 <script src="/static/script.js"></script>
