@@ -1,0 +1,30 @@
+body {
+    background:black;
+    color:white;
+    font-family:monospace;
+    text-align:center;
+}
+
+input, button {
+    width:80%;
+    padding:12px;
+    margin:8px;
+    background:black;
+    color:white;
+    border:1px solid white;
+}
+
+button:hover {
+    background:white;
+    color:black;
+}
+
+.glitch {
+    animation: flicker 1s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
