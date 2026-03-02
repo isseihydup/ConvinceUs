@@ -1,10 +1,4 @@
 flask
 flask-socketio
 eventlet
-flask-cors
 gunicorn
-
-
-pip install -r requirements.txt
-
-gunicorn server:app --worker-class eventlet -w 1
