@@ -1,3 +1,5 @@
+alert("JS Loaded");
+
 const socket = io();
 
 function enter(){
