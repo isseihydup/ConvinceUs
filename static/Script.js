@@ -1,11 +1,6 @@
-alert("JS Loaded");
-
 const socket = io();
-
-function enter(){
-    document.getElementById("intro").style.display="none";
-    document.getElementById("menu").style.display="block";
-}
+let currentRoom = "";
+let playerName = "";
 
 function createRoom(){
     socket.emit("create_room");
@@ -17,37 +12,33 @@ socket.on("room_created", room=>{
 });
 
 function joinRoom(){
-    const name = document.getElementById("name").value;
-    const room = document.getElementById("room").value;
-    socket.emit("join_room",{name, room});
+    playerName = document.getElementById("name").value;
+    currentRoom = document.getElementById("room").value;
+
+    socket.emit("join_room",{name:playerName, room:currentRoom});
     document.getElementById("menu").style.display="none";
     document.getElementById("game").style.display="block";
-    document.getElementById("roomDisplay").innerText="Room: "+room;
+    document.getElementById("roomDisplay").innerText="Room: "+currentRoom;
 }
 
 socket.on("player_joined", name=>{
-    const div = document.getElementById("players");
-    div.innerHTML += "<p>"+name+"</p>";
+    document.getElementById("players").innerHTML +=
+        `<button onclick="vote('${name}')">${name}</button>`;
 });
 
 function startGame(){
-    const room = document.getElementById("room").value;
-    socket.emit("start_game", room);
+    socket.emit("start_game", currentRoom);
 }
 
-socket.on("game_started", data=>{
-    const name = document.getElementById("name").value;
-    const role = data.roles[name];
-    document.getElementById("role").innerHTML =
-        "<h3>Your Role: "+role+"</h3>" +
-        (role === "Crew" ? "<p>Topic: "+data.topic+"</p>" : "<p>Unknown Topic</p>");
-});
-
-function vote(player){
-    const room = document.getElementById("room").value;
-    socket.emit("vote",{room, target:player});
+function vote(target){
+    socket.emit("vote",{
+        room:currentRoom,
+        voter:playerName,
+        target:target
+    });
 }
 
-socket.on("vote_update", data=>{
-    alert("Vote cast for "+data.target);
+socket.on("eliminated", data=>{
+    document.getElementById("status").innerHTML =
+        `ELIMINATED: ${data.player}<br>ROLE: ${data.role}`;
 });
